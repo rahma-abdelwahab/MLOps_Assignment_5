@@ -29,13 +29,13 @@ jobs:
           DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
-          dvc remote add origin https://dagshub.com/rahma-abdelwahab/MLOps_Assignment_5.dvc
+          dvc remote add -f origin https://dagshub.com/rahma-abdelwahab/MLOps_Assignment_5.dvc
           dvc remote modify origin auth basic
           dvc remote modify origin user $DAGSHUB_USERNAME
           dvc remote modify origin password $DAGSHUB_TOKEN
           dvc remote default origin
           dvc pull -v
-
+          
       - name: Train model
         env:
           MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
