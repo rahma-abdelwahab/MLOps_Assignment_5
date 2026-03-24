@@ -35,14 +35,14 @@ jobs:
           dvc remote modify origin password $DAGSHUB_TOKEN
           dvc remote default origin
           dvc pull -v
-          
+
       - name: Train model
         env:
           MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
           MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
-        #run: python train.py --accuracy-override 0.80
-        run: python train.py
+        run: python train.py --accuracy-override 0.80
+        #run: python train.py
 
       - name: Verify model_info.txt exists
         run: cat model_info.txt
