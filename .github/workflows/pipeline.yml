@@ -33,7 +33,7 @@ jobs:
           dvc remote modify origin --global auth basic
           dvc remote modify origin --global user $DAGSHUB_USERNAME
           dvc remote modify origin --global password $DAGSHUB_TOKEN
-          dvc pull -v || true
+          dvc pull -v
 
       - name: Train model
         env:
