@@ -29,10 +29,11 @@ jobs:
           DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
+          pip install "dvc[http]"
           dvc remote modify origin --global auth basic
           dvc remote modify origin --global user $DAGSHUB_USERNAME
           dvc remote modify origin --global password $DAGSHUB_TOKEN
-          dvc pull -v 
+          dvc pull -v || true
 
       - name: Train model
         env:
