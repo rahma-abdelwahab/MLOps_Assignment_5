@@ -25,7 +25,14 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Pull data with DVC
-        run: dvc pull
+        env:
+          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          dvc remote modify origin --global auth basic
+          dvc remote modify origin --global user $DAGSHUB_USERNAME
+          dvc remote modify origin --global password $DAGSHUB_TOKEN
+          dvc pull
 
       - name: Train model
         env:
