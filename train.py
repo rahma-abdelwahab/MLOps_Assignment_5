@@ -20,7 +20,10 @@ def main():
     args = parser.parse_args()
 
     # 1. Load data
-    X, y = load_breast_cancer(return_X_y=True)
+    import pandas as pd
+    df = pd.read_csv("data/breast_cancer.csv")
+    X = df.drop(columns=["target"])
+    y = df["target"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )

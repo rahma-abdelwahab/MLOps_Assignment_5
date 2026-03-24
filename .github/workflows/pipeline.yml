@@ -25,9 +25,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Pull data with DVC
-        run: |
-          dvc init --no-scm || true
-          dvc pull || echo "No DVC remote configured — skipping pull."
+        run: dvc pull
 
       - name: Train model
         env:

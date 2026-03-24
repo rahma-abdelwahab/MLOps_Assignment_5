@@ -10,7 +10,7 @@ __pycache__/
 *.egg-info/
 
 # DVC
-/data/*.dvc
+/data/*.csv
 .dvc/tmp/
 .dvc/cache/
 
