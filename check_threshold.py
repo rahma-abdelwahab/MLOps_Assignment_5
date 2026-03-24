@@ -1,8 +1,3 @@
-"""
-check_threshold.py — Read the MLflow Run ID from model_info.txt,
-                     query the accuracy metric, and fail if it's below 0.85.
-"""
-
 import os
 import sys
 import mlflow
@@ -39,10 +34,18 @@ def main():
 
     # 4. Check threshold
     if accuracy < THRESHOLD:
-        print(f"FAILED — accuracy {accuracy:.4f} is below threshold {THRESHOLD}.")
+        msg = f"FAILED — accuracy {accuracy:.4f} is below threshold {THRESHOLD}."
+        print(msg)
+        if "GITHUB_STEP_SUMMARY" in os.environ:
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+                f.write(f"### ❌ {msg}\n")
         sys.exit(1)
     else:
-        print(f"PASSED — accuracy {accuracy:.4f} meets threshold {THRESHOLD}.")
+        msg = f"PASSED — accuracy {accuracy:.4f} meets threshold {THRESHOLD}."
+        print(msg)
+        if "GITHUB_STEP_SUMMARY" in os.environ:
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+                f.write(f"### ✅ {msg}\n")
         sys.exit(0)
 
 
