@@ -1,3 +1,8 @@
+"""
+check_threshold.py — Read the MLflow Run ID from model_info.txt,
+                     query the accuracy metric, and fail if it's below 0.85.
+"""
+
 import os
 import sys
 import mlflow
